@@ -22,10 +22,10 @@
     background-color: red;
     height: 150px;
     border-radius: 50%;
-    box-shadow: black 1px 5px 1px 3px;
+    box-shadow: black 5px 11px 1px 1px;
 }
 
 .game__circle:active {
     background-color: greenyellow;
-    box-shadow: black 1px 5px 1px 0px;
+    box-shadow: black 5px 5px 0px 0px;
 }
