@@ -1,11 +1,58 @@
 let circle = document.querySelector(".story__circle");
-let score_text = document.querySelector(".story__score");;
+let score_text = document.querySelector(".story__score");
 let score = 0;
+if (localStorage.getItem("score") != null) {
+    score = localStorage.getItem("score");
+}
 let blockClick = false;
 let secretKey = "AF90J";
 
-$(".story-mode").hide();
-$(".shop-mode").hide();
+window.onload = function() {
+    
+    $(".story-mode").hide();
+    $(".shop-mode").hide();
+    allListeners(); 
+}
+
+
+function allListeners() {
+    document.querySelector(".menu__on-story-mode").addEventListener("click" , function() { // Включаем story-mode из меню
+        onStoryMode();
+    });
+    
+    document.querySelector(".menu-navbar").addEventListener("click" , function() {
+        onMenu();
+    });
+    
+    document.querySelector(".story-mode-navbar").addEventListener("click" , function() { // Включаем story-mode из меню
+        onStoryMode();
+    });
+    
+    document.querySelector(".menu__on-shop-mode").addEventListener("click" , function() { // Включаем story-mode из меню
+        onShopMode();
+    });
+    
+    document.querySelector(".shop-mode-navbar").addEventListener("click" , function() { // Включаем story-mode из меню
+        onShopMode();
+    });
+    
+    document.querySelector(".shop__btn").addEventListener("click" , function() {
+        if (document.querySelector(".shop__check-password").value == secretKey) {
+            alert("Ваш ключ верен, но этот режим еще не сделан)");
+        }
+    
+        else {
+            alert("Ключ не верен, для продолжения требуется пройти сюжетный режим)");
+        }
+    });
+       
+    
+    circle.addEventListener("mouseup" , function() {
+        afterClickButton();
+    });
+}
+
+
 
 function onStoryMode() {
     document.querySelector(".active").classList.remove("active");
@@ -36,6 +83,7 @@ function afterClickButton() {
     if (blockClick == false) {
         score++;
         score_text.innerHTML = score;
+        localStorage.setItem("score" , score.toString());
         checkScore();
     } 
 };
@@ -183,44 +231,3 @@ function checkScore() {
         blockClick = true;
     }
 }
-
-
-
-document.querySelector(".menu__on-story-mode").addEventListener("click" , function() { // Включаем story-mode из меню
-    onStoryMode();
-});
-
-document.querySelector(".menu-navbar").addEventListener("click" , function() {
-    onMenu();
-});
-
-document.querySelector(".story-mode-navbar").addEventListener("click" , function() { // Включаем story-mode из меню
-    onStoryMode();
-});
-
-document.querySelector(".menu__on-shop-mode").addEventListener("click" , function() { // Включаем story-mode из меню
-    onShopMode();
-});
-
-document.querySelector(".shop-mode-navbar").addEventListener("click" , function() { // Включаем story-mode из меню
-    onShopMode();
-});
-
-document.querySelector(".shop__btn").addEventListener("click" , function() {
-    if (document.querySelector(".shop__check-password").value == secretKey) {
-        alert("Ваш код верен, но этот режим еще не сделан)");
-    }
-
-    else {
-        alert("Ключ не верен, для продолжения требуется пройти сюжетный режим)");
-    }
-});
-
-
-
-
-
-circle.addEventListener("mouseup" , function() {
-    afterClickButton();
-});
-
